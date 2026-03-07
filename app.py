@@ -39,41 +39,40 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     c_b, o_b = run_simulation(cost_b, val_b, fail_c)
     inc_c, inc_o = c_a - c_b, o_a - o_b
     # --- EXECUTIVE SUMMARY SECTION ---
-        st.divider()
-        st.subheader("📝 Executive Summary & Verdict")
-        
-        # 1. Define the math for the app to recognize
-        avg_diff_cost = inc_c.mean()
-        avg_diff_effect = inc_o.mean()
-        # Avoid division by zero
-        avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
-        # Assuming threshold from your sidebar slider or 300,000 as seen in your screenshot
-        wtp_threshold = 300000 
-        p_ce = (inc_c / inc_o < wtp_threshold).mean() * 100 
-        
-        # 2. Logic for the Verdict
-        if avg_icer < 0 and avg_diff_effect > 0:
-            verdict = f"**Strategy {name_a} is 'Dominant'**"
-            details = f"It provides better clinical outcomes while actually reducing total costs."
-            color = "success"
-        elif avg_icer < wtp_threshold:
-            verdict = f"**Strategy {name_a} is Cost-Effective**"
-            details = f"The clinical gains justify the investment based on the ₹{wtp_threshold:,} threshold."
-            color = "info"
-        else:
-            verdict = f"**Strategy {name_b} is Preferred**"
-            details = "The new strategy exceeds the cost threshold for the clinical benefit provided."
-            color = "warning"
+    st.divider()
+    st.subheader("📝 Executive Summary & Verdict") 
+    # 1. Define the math for the app to recognize
+    avg_diff_cost = inc_c.mean()
+    avg_diff_effect = inc_o.mean()
+    # Avoid division by zero
+    avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
+    # Assuming threshold from your sidebar slider or 300,000 as seen in your screenshot
+    wtp_threshold = 300000 
+    p_ce = (inc_c / inc_o < wtp_threshold).mean() * 100 
+    
+    # 2. Logic for the Verdict
+    if avg_icer < 0 and avg_diff_effect > 0:
+        verdict = f"**Strategy {name_a} is 'Dominant'**"
+        details = f"It provides better clinical outcomes while actually reducing total costs."
+        color = "success"
+    elif avg_icer < wtp_threshold:
+        verdict = f"**Strategy {name_a} is Cost-Effective**"
+        details = f"The clinical gains justify the investment based on the ₹{wtp_threshold:,} threshold."
+        color = "info"
+    else:
+        verdict = f"**Strategy {name_b} is Preferred**"
+        details = "The new strategy exceeds the cost threshold for the clinical benefit provided."
+        color = "warning"
 
-        # 3. Displaying the Verdict Card
-        st.info(f"### {verdict}\n{details}")
+    # 3. Displaying the Verdict Card
+    st.info(f"### {verdict}\n{details}")
 
-        # 4. Key Metrics at a Glance
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Average ICER", f"₹{avg_icer:,.0f}")
-        m2.metric("Confidence Level", f"{p_ce:.1f}%")
-        m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
-        st.divider()
+    # 4. Key Metrics at a Glance
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Average ICER", f"₹{avg_icer:,.0f}")
+    m2.metric("Confidence Level", f"{p_ce:.1f}%")
+    m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
+    st.divider()
     st.divider()
     st.subheader("📝 Executive Summary & Verdict")
     
