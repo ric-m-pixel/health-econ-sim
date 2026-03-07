@@ -38,6 +38,33 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     c_a, o_a = run_simulation(cost_a, val_a, fail_c)
     c_b, o_b = run_simulation(cost_b, val_b, fail_c)
     inc_c, inc_o = c_a - c_b, o_a - o_b
+    # --- EXECUTIVE SUMMARY SECTION ---
+    st.divider()
+    st.subheader("📝 Executive Summary & Verdict")
+    
+    # Logic for the Verdict
+    if avg_icer < 0:
+        verdict = f"**Strategy {name_a} is 'Dominant'**"
+        details = f"It provides better clinical outcomes while actually reducing total costs by saving on downstream failures."
+        color = "success"
+    elif avg_icer < wtp:
+        verdict = f"**Strategy {name_a} is Cost-Effective**"
+        details = f"The extra cost is justified by the clinical gains based on your ₹{wtp:,} threshold."
+        color = "info"
+    else:
+        verdict = f"**Strategy {name_b} is Preferred**"
+        details = f"The new strategy exceeds the budget threshold for the clinical benefit provided."
+        color = "warning"
+
+    # Displaying the Verdict Card
+    st.info(f"### {verdict}\n{details}")
+
+    # Key Metrics at a Glance
+    m1, m2, m3 = st.columns(3)
+    m1.metric("Average ICER", f"₹{avg_icer:,.0f}")
+    m2.metric("Confidence Level", f"{p_ce:.1f}%")
+    m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
+    st.divider()
 
     tab1, tab2, tab3, tab4 = st.tabs(["📊 Distribution", "🎯 CE Plane", "🌪️ Tornado Analysis", "💾 Export"])
 
