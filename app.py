@@ -18,8 +18,14 @@ st.title("🛡️ Healthcare Value and Decision Suite")
 with st.sidebar:
     st.header("🛠️ Model Configuration")
     model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
-    fail_c = st.number_input("Downstream Cost (₹)", 0, 50000, 5000)
+    fail_c = st.number_input("Downstream Failure Cost (₹)", 0, 50000, 5000)
     wtp = st.slider("WTP Threshold (₹)", 50000, 1000000, 300000, 50000)
+    st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
+    
+    # This must be OUTSIDE any buttons to show all the time
+    st.divider()
+    st.markdown("### 👨‍💻 Developed By")
+    st.markdown("**RM**")
 
 col1, col2 = st.columns(2)
 with col1:
