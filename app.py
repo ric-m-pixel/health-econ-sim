@@ -12,7 +12,7 @@ def run_simulation(cost, effect, fail_cost, iterations=10000):
     return costs, outcomes
 
 # --- APP SETUP ---
-st.set_page_config(page_title="HTA Decision Suite", layout="wide")
+st.set_page_config(page_title="Healthcare Value and Decision Suite", layout="wide")
 st.title("🛡️ HTA Decision-Support Suite")
 
 with st.sidebar:
