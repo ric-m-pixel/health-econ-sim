@@ -39,7 +39,6 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     c_b, o_b = run_simulation(cost_b, val_b, fail_c)
     inc_c, inc_o = c_a - c_b, o_a - o_b
     # --- EXECUTIVE SUMMARY SECTION ---
-    # --- EXECUTIVE SUMMARY SECTION ---
         st.divider()
         st.subheader("📝 Executive Summary & Verdict")
         
