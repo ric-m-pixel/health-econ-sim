@@ -16,10 +16,17 @@ st.set_page_config(page_title="Healthcare Value and Decision Suite", layout="wid
 st.title("🛡️ Healthcare Value and Decision Suite")
 
 with st.sidebar:
+    # --- Currency Selector ---
+    currency_symbol = st.selectbox(
+        "Select Currency",
+        options=["$", "€", "£", "₹", "¥"],
+        index=0  # Defaults to USD ($) for international reviewers
+    )
+
     st.header("🛠️ Model Configuration")
     model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
-    fail_c = st.number_input("Downstream Failure Cost (₹)", 0, 50000, 5000)
-    wtp = st.slider("WTP Threshold (₹)", 1, 500000, 5000, 1)
+    fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+    wtp = st.slider(f"WTP Threshold ({currency_symbol})", 1, 500000, 5000, 1)
     st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
     
     # This must be OUTSIDE any buttons to show all the time
