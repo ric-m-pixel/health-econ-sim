@@ -38,12 +38,12 @@ col1, col2 = st.columns(2)
 with col1:
     st.markdown("### 🔵 Strategy A")
     name_a = st.text_input("Name", "New Treatment", key="na")
-    cost_a = st.number_input("Cost (₹)", 0, 20000, 1500, key="ca")
+    cost_a = st.number_input(f"Cost ({currency_symbol})", 0, 20000, 1500, key="ca")
     val_a = st.slider("Effectiveness", 0.0, 1.0, 0.85, key="va")
 with col2:
     st.markdown("### 🟠 Strategy B")
     name_b = st.text_input("Name", "Standard Care", key="nb")
-    cost_b = st.number_input("Cost (₹)", 0, 20000, 800, key="cb")
+    cost_b = st.number_input(f"Cost ({currency_symbol})", 0, 20000, 800, key="cb")
     val_b = st.slider("Effectiveness", 0.0, 1.0, 0.70, key="vb")
 
 if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
