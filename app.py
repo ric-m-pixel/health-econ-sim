@@ -96,7 +96,7 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     m2.metric("Confidence Level", f"{p_ce:.1f}%")
     m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
     # Displaying the Verdict Card
-    st.info(f"### {verdict}\n{details}")
+    st.info(f"### {verdict}\n{reason}")
 
     # Key Metrics at a Glance
     m1, m2, m3 = st.columns(3)
