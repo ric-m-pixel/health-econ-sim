@@ -116,6 +116,16 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
             sns.kdeplot(c_a, fill=True, label=name_a, color="#1f77b4")
             sns.kdeplot(c_b, fill=True, label=name_b, color="#ff7f0e")
             st.pyplot(fig1)
+            # --- Interpretation for the Distribution Chart ---
+                with st.expander("💡 How to interpret this distribution"):
+                st.markdown("""
+                **What is this showing?**  
+                This chart displays the probability distribution of our 10,000 simulated iterations. Because healthcare data is rarely exact, this shows us the *range* of likely outcomes rather than just a single average number.
+                
+                * **The Peak:** The highest point of the curve is the most likely expected value.
+                * **The Width:** This represents uncertainty. A wider, flatter curve means the data is highly variable and unpredictable. A narrow, tall curve means we are very confident in the outcome.
+                * **The Overlap:** If the curves for Strategy A and Strategy B heavily overlap, it indicates a high probability that they will perform identically in the real world.
+                """)
     
     with tab2:
             fig2, ax2 = plt.subplots(figsize=(8, 5))
