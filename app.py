@@ -66,13 +66,21 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
     # 2. Logic for the Verdict
-    nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
+   nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
 
-    if avg_diff_effect <= 0 and avg_diff_cost >= 0:
-            verdict = f"Strategy '{name_a}' is Strictly Dominated"
-            verdict_color = "red"
-            reason = f"The new strategy is more expensive and less effective. Reject immediately."
+# --- INSERT NEW CHECK HERE ---
+if avg_diff_effect == 0 and avg_diff_cost == 0:
+    verdict = "Strategies are Equivalent"
+    verdict_color = "gray"
+    reason = "Both strategies have identical costs and clinical outcomes."
 
+# --- CHANGE THIS TO 'elif' ---
+elif avg_diff_effect <= 0 and avg_diff_cost >= 0:
+    verdict = f"Strategy '{name_a}' is Strictly Dominated"
+    verdict_color = "red"
+    reason = "The new strategy is more expensive and less effective. Reject immediately."
+
+elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
     elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
             verdict = f"Strategy '{name_a}' is Strictly Dominant"
             verdict_color = "green"
