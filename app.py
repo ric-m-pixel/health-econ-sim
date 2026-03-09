@@ -47,13 +47,13 @@ with col2:
     val_b = st.slider("Effectiveness", 0.0, 1.0, 0.70, key="vb")
 
 if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
-    # Main Simulation
-    c_a, o_a = run_simulation(cost_a, val_a, fail_c)
-    c_b, o_b = run_simulation(cost_b, val_b, fail_c)
-    inc_c, inc_o = c_a - c_b, o_a - o_b
-    # --- EXECUTIVE SUMMARY SECTION ---
-    st.divider()
-    st.subheader("📝 Executive Summary & Verdict") 
+# Main Simulation
+c_a, o_a = run_simulation(cost_a, val_a, fail_c)
+c_b, o_b = run_simulation(cost_b, val_b, fail_c)
+inc_c, inc_o = c_a - c_b, o_a - o_b
+# --- EXECUTIVE SUMMARY SECTION ---
+st.divider()
+st.subheader("📝 Executive Summary & Verdict") 
 # 1. Define the math for the app to recognize
 avg_diff_cost = inc_c.mean()
 avg_diff_effect = inc_o.mean()
@@ -66,8 +66,6 @@ avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
 p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
 # 2. Logic for the Verdict
-avg_diff_cost = inc_c.mean()
-avg_diff_effect = inc_o.mean()
 nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
 
 # --- INSERT NEW CHECK HERE ---
