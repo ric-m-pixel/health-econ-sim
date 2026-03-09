@@ -152,8 +152,8 @@ with tab4:
 
     # Metrics
 st.divider()
-    avg_icer = np.mean(inc_c) / np.mean(inc_o)
-    p_ce = np.mean(inc_c < (inc_o * wtp)) * 100
-    m1, m2 = st.columns(2)
-    m1.metric("Mean ICER", f"₹{avg_icer:,.0f}")
-    m2.metric("Confidence in Cost-Effectiveness", f"{p_ce:.1f}%")
+avg_icer = np.mean(inc_c) / np.mean(inc_o)
+p_ce = np.mean(inc_c < (inc_o * wtp)) * 100
+m1, m2 = st.columns(2)
+m1.metric("Mean ICER", f"₹{avg_icer:,.0f}")
+m2.metric("Confidence in Cost-Effectiveness", f"{p_ce:.1f}%")
