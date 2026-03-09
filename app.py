@@ -65,8 +65,8 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     # NMB = (Effectiveness * WTP) - Cost. If NMB > 0, it's cost-effective!
     p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
-    # 2. Logic for the Verdict
-   nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
+# 2. Logic for the Verdict
+nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
 
 # --- INSERT NEW CHECK HERE ---
 if avg_diff_effect == 0 and avg_diff_cost == 0:
@@ -81,7 +81,6 @@ elif avg_diff_effect <= 0 and avg_diff_cost >= 0:
     reason = "The new strategy is more expensive and less effective. Reject immediately."
 
 elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
-    elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
             verdict = f"Strategy '{name_a}' is Strictly Dominant"
             verdict_color = "green"
             reason = f"The new strategy is cheaper and more effective. Highly recommended."
