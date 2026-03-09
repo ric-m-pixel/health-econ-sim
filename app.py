@@ -32,7 +32,7 @@ with st.sidebar:
     # This must be OUTSIDE any buttons to show all the time
     st.divider()
     st.markdown("### 👨‍💻 Developed By")
-    st.markdown("**RM**")
+    st.markdown("**Richa Mishra**")
 
 col1, col2 = st.columns(2)
 with col1:
