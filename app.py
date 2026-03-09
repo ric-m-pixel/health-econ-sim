@@ -66,6 +66,8 @@ avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
 p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
 # 2. Logic for the Verdict
+avg_diff_cost = inc_c.mean()
+avg_diff_effect = inc_o.mean()
 nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
 
 # --- INSERT NEW CHECK HERE ---
