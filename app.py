@@ -60,10 +60,33 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     # Avoid division by zero
     avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
     # Assuming threshold from your sidebar slider or 300,000 as seen in your screenshot
-    wtp_threshold = 300000 
-    p_ce = (inc_c / inc_o < wtp_threshold).mean() * 100 
-    
-    # 2. Logic for the Verdict
+    # Ensure we are using the dynamic wtp from your sidebar, not a hardcoded number
+        # Calculate probability of cost-effectiveness using Net Monetary Benefit (NMB)
+        # NMB = (Effectiveness * WTP) - Cost. If NMB > 0, it's cost-effective!
+        p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
+
+        # 2. Logic for the Verdict
+        nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
+
+        if avg_diff_effect <= 0 and avg_diff_cost >= 0:
+            verdict = f"Strategy '{name_a}' is Strictly Dominated"
+            verdict_color = "red"
+            reason = f"The new strategy is more expensive and less effective. Reject immediately."
+
+        elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
+            verdict = f"Strategy '{name_a}' is Strictly Dominant"
+            verdict_color = "green"
+            reason = f"The new strategy is cheaper and more effective. Highly recommended."
+
+        elif nmb_avg > 0:
+            verdict = f"Strategy '{name_a}' is Cost-Effective"
+            verdict_color = "blue"
+            reason = f"The clinical gains justify the investment based on the {currency_symbol}{wtp} threshold."
+
+        else:
+            verdict = f"Strategy '{name_a}' is Not Cost-Effective"
+            verdict_color = "orange"
+            reason = f"The clinical gains do NOT justify the investment at the {currency_symbol}{wtp} threshold."
     if avg_icer < 0 and avg_diff_effect > 0:
         verdict = f"**Strategy {name_a} is 'Dominant'**"
         details = f"It provides better clinical outcomes while actually reducing total costs."
