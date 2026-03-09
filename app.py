@@ -63,7 +63,7 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     # Ensure we are using the dynamic wtp from your sidebar, not a hardcoded number
         # Calculate probability of cost-effectiveness using Net Monetary Benefit (NMB)
         # NMB = (Effectiveness * WTP) - Cost. If NMB > 0, it's cost-effective!
-        p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
+   p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
         # 2. Logic for the Verdict
         nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
