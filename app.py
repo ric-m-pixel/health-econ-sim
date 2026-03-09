@@ -133,9 +133,9 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
             # Check to avoid dividing by zero if effectiveness is identical
             diff_val = val_a - val_b
             if diff_val == 0:
-            base_icer = 0
+                base_icer = 0
             else:
-            base_icer = (cost_a - cost_b) / diff_val
+                base_icer = (cost_a - cost_b) / diff_val
             low_swings = [base_icer * 0.8, base_icer * 1.3, base_icer * 0.9]
             high_swings = [base_icer * 1.2, base_icer * 0.7, base_icer * 1.1]
             
