@@ -85,12 +85,12 @@ elif avg_diff_effect >= 0 and avg_diff_cost <= 0:
             verdict_color = "green"
             reason = f"The new strategy is cheaper and more effective. Highly recommended."
 
-    elif nmb_avg > 0:
+elif nmb_avg > 0:
             verdict = f"Strategy '{name_a}' is Cost-Effective"
             verdict_color = "blue"
             reason = f"The clinical gains justify the investment based on the {currency_symbol}{wtp} threshold."
 
-    else:
+else:
             verdict = f"Strategy '{name_a}' is Not Cost-Effective"
             verdict_color = "orange"
             reason = f"The clinical gains do NOT justify the investment at the {currency_symbol}{wtp} threshold."
