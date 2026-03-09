@@ -146,8 +146,8 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
             st.caption("Bars show how the ICER changes when each input is varied by ±20%.")
 
     with tab4:
-            df = pd.DataFrame({"Inc_Cost": inc_c, "Inc_Effect": inc_o})
-            st.download_button("📥 Download Raw Data", df.to_csv().encode('utf-8'), "hta_data.csv")
+        df = pd.DataFrame({"Inc_Cost": inc_c, "Inc_Effect": inc_o})
+        st.download_button("📥 Download Raw Data", df.to_csv().encode('utf-8'), "hta_data.csv")
     
         # Metrics
         st.divider()
