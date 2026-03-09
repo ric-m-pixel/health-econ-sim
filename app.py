@@ -66,8 +66,6 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
 # 2. Logic for the Verdict
-avg_diff_cost = inc_c.mean()
-avg_diff_effect = inc_o.mean()
 nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
 
 # --- INSERT NEW CHECK HERE ---
