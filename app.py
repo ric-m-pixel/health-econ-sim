@@ -134,6 +134,19 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
             plt.plot(x_lim, wtp * x_lim, color='red', linestyle='--')
             plt.axhline(0, color='black', lw=1); plt.axvline(0, color='black', lw=1)
             st.pyplot(fig2)
+            # --- Interpretation for the CE Plane Chart ---
+            with st.expander("💡 How to interpret the CE Plane"):
+                st.markdown("""
+                **What is this showing?**  
+                The Cost-Effectiveness (CE) Plane plots the *difference* in cost against the *difference* in effectiveness for all 10,000 simulations. Each purple dot represents one simulated patient population.
+            
+                * **The 4 Quadrants:**
+                * **Bottom-Right (South-East):** The new strategy is cheaper *and* more effective. (This is a "no-brainer" win!)
+                * **Top-Left (North-West):** The new strategy is more expensive *and* less effective. (Reject immediately!)
+                * **Top-Right (North-East):** The new strategy is more effective but costs more. (Trade-off zone).
+                * **Bottom-Left (South-West):** The new strategy is less effective but saves money.
+                * **The Red Dashed Line:** This represents your Willingness-to-Pay (WTP) threshold. Any purple dot that falls *below and to the right* of this line is a scenario where the new strategy is officially Cost-Effective!
+                """)
     
     with tab3:
             st.subheader("One-Way Sensitivity Analysis")
