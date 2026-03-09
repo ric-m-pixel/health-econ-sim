@@ -118,7 +118,7 @@ with tab1:
         sns.kdeplot(c_b, fill=True, label=name_b, color="#ff7f0e")
         st.pyplot(fig1)
 
-    with tab2:
+with tab2:
         fig2, ax2 = plt.subplots(figsize=(8, 5))
         plt.scatter(inc_o, inc_c, alpha=0.1, color='purple', s=1)
         x_lim = np.array(plt.xlim())
@@ -126,7 +126,7 @@ with tab1:
         plt.axhline(0, color='black', lw=1); plt.axvline(0, color='black', lw=1)
         st.pyplot(fig2)
 
-    with tab3:
+with tab3:
         st.subheader("One-Way Sensitivity Analysis")
         # Simplified Tornado Logic: Varying main params by 20%
         params = ['Cost of Strategy A', 'Effectiveness of A', 'Failure Cost']
@@ -146,7 +146,7 @@ with tab1:
         st.pyplot(fig3)
         st.caption("Bars show how the ICER changes when each input is varied by ±20%.")
 
-    with tab4:
+with tab4:
         df = pd.DataFrame({"Inc_Cost": inc_c, "Inc_Effect": inc_o})
         st.download_button("📥 Download Raw Data", df.to_csv().encode('utf-8'), "hta_data.csv")
 
