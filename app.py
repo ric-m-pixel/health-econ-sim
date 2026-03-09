@@ -131,8 +131,8 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
             params = ['Cost of Strategy A', 'Effectiveness of A', 'Failure Cost']
             # ICER swings (calculated on means for simplicity)
             # Check to avoid dividing by zero if effectiveness is identical
-        diff_val = val_a - val_b
-        if diff_val == 0:
+            diff_val = val_a - val_b
+            if diff_val == 0:
             base_icer = 0
         else:
             base_icer = (cost_a - cost_b) / diff_val
