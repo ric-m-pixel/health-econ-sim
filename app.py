@@ -151,7 +151,7 @@ with tab4:
         st.download_button("📥 Download Raw Data", df.to_csv().encode('utf-8'), "hta_data.csv")
 
     # Metrics
-    st.divider()
+st.divider()
     avg_icer = np.mean(inc_c) / np.mean(inc_o)
     p_ce = np.mean(inc_c < (inc_o * wtp)) * 100
     m1, m2 = st.columns(2)
