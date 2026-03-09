@@ -95,13 +95,13 @@ else:
             verdict_color = "orange"
             reason = f"The clinical gains do NOT justify the investment at the {currency_symbol}{wtp} threshold."
     # 3. Displaying the Verdict Card
-    st.info(f"### {verdict}\n{reason}")
+st.info(f"### {verdict}\n{reason}")
 
-    # 4. Key Metrics at a Glance
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Average ICER", f"{currency_symbol}{avg_icer:,.0f}")
-    m2.metric("Confidence Level", f"{p_ce:.1f}%")
-    m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
+# 4. Key Metrics at a Glance
+m1, m2, m3 = st.columns(3)
+m1.metric("Average ICER", f"{currency_symbol}{avg_icer:,.0f}")
+m2.metric("Confidence Level", f"{p_ce:.1f}%")
+m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
 # Displaying the Verdict Card
 st.info(f"### {verdict}\n{reason}")
 
