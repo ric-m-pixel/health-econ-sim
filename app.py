@@ -54,16 +54,16 @@ if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
     # --- EXECUTIVE SUMMARY SECTION ---
     st.divider()
     st.subheader("📝 Executive Summary & Verdict") 
-    # 1. Define the math for the app to recognize
-    avg_diff_cost = inc_c.mean()
-    avg_diff_effect = inc_o.mean()
-    # Avoid division by zero
-    avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
-    # Assuming threshold from your sidebar slider or 300,000 as seen in your screenshot
-    # Ensure we are using the dynamic wtp from your sidebar, not a hardcoded number
-    # Calculate probability of cost-effectiveness using Net Monetary Benefit (NMB)
-    # NMB = (Effectiveness * WTP) - Cost. If NMB > 0, it's cost-effective!
-    p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
+# 1. Define the math for the app to recognize
+avg_diff_cost = inc_c.mean()
+avg_diff_effect = inc_o.mean()
+# Avoid division by zero
+avg_icer = avg_diff_cost / avg_diff_effect if avg_diff_effect != 0 else 0
+# Assuming threshold from your sidebar slider or 300,000 as seen in your screenshot
+# Ensure we are using the dynamic wtp from your sidebar, not a hardcoded number
+# Calculate probability of cost-effectiveness using Net Monetary Benefit (NMB)
+# NMB = (Effectiveness * WTP) - Cost. If NMB > 0, it's cost-effective!
+p_ce = (((inc_o * wtp) - inc_c) > 0).mean() * 100
 
 # 2. Logic for the Verdict
 nmb_avg = (avg_diff_effect * wtp) - avg_diff_cost
