@@ -45,7 +45,6 @@ with col2:
     name_b = st.text_input("Name", "Standard Care", key="nb")
     cost_b = st.number_input(f"Cost ({currency_symbol})", 0, 20000, 800, key="cb")
     val_b = st.slider("Effectiveness", 0.0, 1.0, 0.70, key="vb")
-
 if st.button("🚀 Run Full Decision Analysis", use_container_width=True):
 # Main Simulation
 c_a, o_a = run_simulation(cost_a, val_a, fail_c)
