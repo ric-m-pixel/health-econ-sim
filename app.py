@@ -112,8 +112,7 @@ m2.metric("Confidence Level", f"{p_ce:.1f}%")
 m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
 st.divider()
 tab1, tab2, tab3, tab4 = st.tabs(["📊 Distribution", "🎯 CE Plane", "🌪️ Tornado Analysis", "💾 Export"])
-
-    with tab1:
+with tab1:
         fig1, ax1 = plt.subplots(figsize=(10, 4))
         sns.kdeplot(c_a, fill=True, label=name_a, color="#1f77b4")
         sns.kdeplot(c_b, fill=True, label=name_b, color="#ff7f0e")
