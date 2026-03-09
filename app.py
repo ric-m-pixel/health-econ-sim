@@ -102,16 +102,16 @@ else:
     m1.metric("Average ICER", f"{currency_symbol}{avg_icer:,.0f}")
     m2.metric("Confidence Level", f"{p_ce:.1f}%")
     m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
-    # Displaying the Verdict Card
-    st.info(f"### {verdict}\n{reason}")
+# Displaying the Verdict Card
+st.info(f"### {verdict}\n{reason}")
 
-    # Key Metrics at a Glance
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Average ICER", f"₹{avg_icer:,.0f}")
-    m2.metric("Confidence Level", f"{p_ce:.1f}%")
-    m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
-    st.divider()
-    tab1, tab2, tab3, tab4 = st.tabs(["📊 Distribution", "🎯 CE Plane", "🌪️ Tornado Analysis", "💾 Export"])
+# Key Metrics at a Glance
+m1, m2, m3 = st.columns(3)
+m1.metric("Average ICER", f"₹{avg_icer:,.0f}")
+m2.metric("Confidence Level", f"{p_ce:.1f}%")
+m3.metric("Decision Status", "High Value" if p_ce > 80 else "Review Required")
+st.divider()
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Distribution", "🎯 CE Plane", "🌪️ Tornado Analysis", "💾 Export"])
 
     with tab1:
         fig1, ax1 = plt.subplots(figsize=(10, 4))
