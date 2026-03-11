@@ -35,7 +35,16 @@ with st.sidebar:
     if analysis_level == "Standard (Static)":
         st.subheader("📍 Static Parameters")
         model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
-        # You will re-add Strategy A/B success sliders here later
+        # --- This line below prevents the SyntaxError ---
+        st.write("Adjust your strategy success rates below.")
+        
+    else:
+        st.subheader("⏳ Markov Parameters")
+        n_states = st.number_input("Number of Health States", 2, 5, 3)
+        state_names = []
+        for i in range(int(n_states)):
+            name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
+            state_names.append(name)
         
     else:
         st.subheader("⏳ Markov Parameters")
