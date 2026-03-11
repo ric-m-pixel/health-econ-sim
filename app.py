@@ -24,19 +24,19 @@ with st.sidebar:
     )
     st.header("🛠️ Model Configuration")
 st.header("🛠️ Model Configuration")
-    analysis_level = st.radio(
+        analysis_level = st.radio(
         "Select Model Complexity",
         ["Standard (Static)", "Advanced (Temporal/Markov)"]
-    )
+        )
+        
+        st.divider()
     
-    st.divider()
-
-    # Universal Inputs
-    fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
-    wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
-    st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
-    
-    st.divider()
+        # Universal Inputs
+        fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+        wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
+        st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
+        
+        st.divider()
 
     if analysis_level == "Standard (Static)":
         st.subheader("📍 Static Parameters")
