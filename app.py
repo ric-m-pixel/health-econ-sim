@@ -55,7 +55,7 @@ with st.sidebar:
         
         # 2. Define starting population (usually 100% in T1)
         st.write(f"Where do the patients start in Year 0? (Must sum to 100%)")
-        cols = st.columns(n)
+        cols = st.columns(len(state_names))
         start_pop = []
         for i, name in enumerate(state_names):
             val = cols[i].number_input(f"% in {name}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
