@@ -258,7 +258,7 @@ else:
             n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
             
             st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
-            cols = st.columns(len(state_names))
+        cols = st.columns(len(state_names))
         start_pop = []
         
         # We also change 'names' to 'state_names' here:
