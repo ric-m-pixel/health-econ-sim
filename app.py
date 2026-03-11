@@ -300,7 +300,7 @@ else:
         st.divider()
 
         # The Math Engine for the Decision Tree
-     if st.button("📊 Calculate Decision Tree"):
+        if st.button("📊 Calculate Decision Tree"):
             import pandas as pd
             
             # Calculate Expected Costs
