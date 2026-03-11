@@ -313,7 +313,7 @@ else:
                 st.line_chart(trace_df)
     
         # --- DECISION TREE SECTION ---
-        else:
-            st.subheader("🌳 Clinical Decision Tree")
-            st.info("We will build the branch pathways for the Decision Tree here next!")
+            else:
+                st.subheader("🌳 Clinical Decision Tree")
+                st.info("We will build the branch pathways for the Decision Tree here next!")
          
