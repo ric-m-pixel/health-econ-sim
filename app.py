@@ -327,8 +327,6 @@ else:
             inc_util = exp_util_B - exp_util_A
             icer = inc_cost / inc_util if inc_util != 0 else 0
                         
-                      
-            )
             # Show a Bar Chart comparing the two
                   st.write("### Visual Comparison")
                   st.bar_chart(res_df)
