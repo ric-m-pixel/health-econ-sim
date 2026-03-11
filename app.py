@@ -54,8 +54,8 @@ with st.sidebar:
         
     
 st.divider()
-    st.markdown("### 👨‍💻 Developed By")
-    st.markdown("**Richa Mishra**")
+        st.markdown("### 👨‍💻 Developed By")
+        st.markdown("**Richa Mishra**")
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("### 🔵 Strategy A")
