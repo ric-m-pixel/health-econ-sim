@@ -273,7 +273,7 @@ else:
             st.success("Simulation Complete!")
             st.line_chart(trace_df)
 
-        else:
+    else:
           # --- DECISION TREE SECTION ---
          st.subheader("🌳 Clinical Decision Tree")
         st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
