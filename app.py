@@ -22,7 +22,7 @@ with st.sidebar:
     options=["$", "€", "£", "₹", "¥"],
     index=0  # Defaults to USD ($) for international reviewers
     )
-              st.header("🛠️ Model Configuration")
+   st.header("🛠️ Model Configuration")
 
     analysis_level = st.radio(
         "Select Model Complexity",
