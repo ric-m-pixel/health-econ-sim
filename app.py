@@ -218,73 +218,62 @@ if analysis_level == "Standard (Static)":
                 m1.metric("Mean ICER", f"₹{avg_icer:,.0f}")
                 m2.metric("Confidence in Cost-Effectiveness", f"{p_ce:.1f}%")
 else:
-            st.title("🚀 Advanced Modeling Suite")
-            
-            # Choice for the user
-            adv_tool = st.radio(
-                "Select your advanced method:",
-                ["Decision Tree (Short-term)", "Markov Chain (Long-term)"],
-                horizontal=True
-            )
-            
-            st.divider()
+    st.title("🚀 Advanced Modeling Suite")
+    
+    adv_tool = st.radio(
+        "Select your advanced method:",
+        ["Decision Tree (Short-term)", "Markov Chain (Long-term)"],
+        horizontal=True
+    )
+    
+    st.divider()
+
+    if adv_tool == "Markov Chain (Long-term)":
+        st.subheader("🔄 Markov Transition Matrix")
+        import pandas as pd
+        import numpy as np
         
-            if adv_tool == "Markov Chain (Long-term)":
-                st.subheader("🔄 Markov Transition Matrix")
-                # Use the names we created in the sidebar
-                # 'state_names' comes from your sidebar logic around line 50
-                n = len(state_names)
-                
-                # Create an editable matrix
-                import pandas as pd
-                import numpy as np
+        # Get names from sidebar (fallback to T1/T2/T3 if not found)
+        state_names = st.session_state.get('state_names', ["T1", "T2", "T3"])
+        n = len(state_names)
         
-                init_matrix = np.identity(n)
-                matrix_df = pd.DataFrame(init_matrix, index=state_names, columns=state_names)
-                
-                st.write("Enter the annual probability of moving between states:")
-                edited_matrix = st.data_editor(matrix_df, use_container_width=True, key="m_matrix")
-                
-                if not np.allclose(edited_matrix.sum(axis=1), 1.0):
-                    st.warning("⚠️ Each row must sum to 1.0 (100%).")
-            
-            else:
-                st.subheader("🌳 Clinical Decision Tree")
-                st.info("We will build the branch pathways for the Decision Tree here next!")
-# --- MARKOV SIMULATION SETTINGS ---
-            st.divider()
-            st.subheader("⏳ Simulation Settings")
-            
-            n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
-            
-            st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
-            cols = st.columns(len(state_names))
-            start_pop = []
-            
-            # We also change 'names' to 'state_names' here:
-            for i, state in enumerate(state_names):
-                val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
-                start_pop.append(val)
-            if st.button("📈 Run Markov Simulation"):
-                    import pandas as pd
-                    import numpy as np
-                    
-                    history = [np.array(start_pop)]
-                    current_pop = np.array(start_pop)
-                    
-                    for _ in range(n_cycles):
-                        current_pop = current_pop @ edited_matrix.values
-                        history.append(current_pop)
-                        
-                    trace_df = pd.DataFrame(history, columns=state_names)
-                    trace_df.index.name = "Year"
-                    
-                    st.success("Simulation Complete!")
-                    st.line_chart(trace_df)
+        init_matrix = np.identity(n)
+        matrix_df = pd.DataFrame(init_matrix, index=state_names, columns=state_names)
         
-            else:
-                st.subheader("🌳 Clinical Decision Tree")
-                st.info("We will build the branch pathways for the Decision Tree here next!")
-           
-       
-                 
+        st.write("Enter the annual probability of moving between states:")
+        edited_matrix = st.data_editor(matrix_df, use_container_width=True, key="m_matrix")
+        
+        if not np.allclose(edited_matrix.sum(axis=1), 1.0):
+            st.warning("⚠️ Each row must sum to 1.0 (100%).")
+            
+        # --- MARKOV SIMULATION SETTINGS ---
+        st.divider()
+        st.subheader("⏳ Simulation Settings")
+        
+        n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
+        
+        st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
+        cols = st.columns(len(state_names))
+        start_pop = []
+        for i, state in enumerate(state_names):
+            val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
+            start_pop.append(val)
+
+        if st.button("📈 Run Markov Simulation"):
+            history = [np.array(start_pop)]
+            current_pop = np.array(start_pop)
+            for _ in range(n_cycles):
+                # The Matrix Multiplication!
+                current_pop = current_pop @ edited_matrix.values
+                history.append(current_pop)
+                
+            trace_df = pd.DataFrame(history, columns=state_names)
+            trace_df.index.name = "Year"
+            
+            st.success("Simulation Complete!")
+            st.line_chart(trace_df)
+
+        else:
+          # --- DECISION TREE SECTION ---
+          st.subheader("🌳 Clinical Decision Tree")
+          st.info("We will build the branch pathways for the Decision Tree here next!")
