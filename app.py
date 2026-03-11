@@ -275,7 +275,6 @@ else:
                 
                 for _ in range(n_cycles):
                # --- This should be indented under 'with st.sidebar:' ---
-    st.header("🛠️ Model Configuration")
 
     analysis_level = st.radio(
         "Select Model Complexity",
