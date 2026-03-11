@@ -23,14 +23,11 @@ with st.sidebar:
     index=0  # Defaults to USD ($) for international reviewers
     )
    st.header("🛠️ Model Configuration")
-
     analysis_level = st.radio(
         "Select Model Complexity",
         ["Standard (Static)", "Advanced (Temporal/Markov)"]
-    )
-    
+    ) 
     st.divider()
-
     # Universal Inputs
     fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
     wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
