@@ -258,7 +258,31 @@ else:
             n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
             
             st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
-            cols = st.columns(len(names))
+            cols = st.columns(len(state_names))
+        start_pop = []
+        
+        # We also change 'names' to 'state_names' here:
+        for i, state in enumerate(state_names):
+            val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
+            start_pop.append(val)
+
+        if st.button("📈 Run Markov Simulation"):
+            import pandas as pd
+            import numpy as np
+            
+            history = [np.array(start_pop)]
+            current_pop = np.array(start_pop)
+            
+            for _ in range(n_cycles):
+                current_pop = current_pop @ edited_matrix.values
+                history.append(current_pop)
+                
+            # And change 'names' to 'state_names' here for the table columns!
+            trace_df = pd.DataFrame(history, columns=state_names)
+            trace_df.index.name = "Year"
+            
+            st.success("Simulation Complete!")
+            st.line_chart(trace_df)
             start_pop = []
             for i, state in enumerate(names):
                 val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
