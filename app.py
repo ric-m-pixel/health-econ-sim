@@ -275,5 +275,54 @@ else:
 
         else:
           # --- DECISION TREE SECTION ---
-          st.subheader("🌳 Clinical Decision Tree")
-          st.info("We will build the branch pathways for the Decision Tree here next!")
+         st.subheader("🌳 Clinical Decision Tree")
+        st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
+
+        # Create two columns for our two strategies
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### 🔵 Strategy A: Standard Care")
+            prob_A = st.slider("Probability of Success (A)", 0.0, 1.0, 0.60, key="pA")
+            c_succ_A = st.number_input("Cost of Success", value=1000, step=100, key="csA")
+            c_fail_A = st.number_input("Cost of Failure", value=5000, step=100, key="cfA")
+            u_succ_A = st.slider("Utility (QALY) of Success", 0.0, 1.0, 0.90, key="usA")
+            u_fail_A = st.slider("Utility (QALY) of Failure", 0.0, 1.0, 0.40, key="ufA")
+
+        with col2:
+            st.markdown("#### 🟠 Strategy B: New Treatment")
+            prob_B = st.slider("Probability of Success (B)", 0.0, 1.0, 0.80, key="pB")
+            c_succ_B = st.number_input("Cost of Success", value=2500, step=100, key="csB")
+            c_fail_B = st.number_input("Cost of Failure", value=4000, step=100, key="cfB")
+            u_succ_B = st.slider("Utility (QALY) of Success", 0.0, 1.0, 0.95, key="usB")
+            u_fail_B = st.slider("Utility (QALY) of Failure", 0.0, 1.0, 0.50, key="ufB")
+
+        st.divider()
+
+        # The Math Engine for the Decision Tree
+        if st.button("📊 Calculate Decision Tree"):
+            import pandas as pd
+            
+            # Calculate Expected Costs
+            exp_cost_A = (prob_A * c_succ_A) + ((1 - prob_A) * c_fail_A)
+            exp_cost_B = (prob_B * c_succ_B) + ((1 - prob_B) * c_fail_B)
+
+            # Calculate Expected Utilities (QALYs)
+            exp_util_A = (prob_A * u_succ_A) + ((1 - prob_A) * u_fail_A)
+            exp_util_B = (prob_B * u_succ_B) + ((1 - prob_B) * u_fail_B)
+
+            # Put the results in a table
+            res_df = pd.DataFrame({
+                "Strategy": ["A: Standard Care", "B: New Treatment"],
+                "Expected Cost": [exp_cost_A, exp_cost_B],
+                "Expected Utility (QALY)": [exp_util_A, exp_util_B]
+            }).set_index("Strategy")
+
+            st.success("Decision Tree Calculation Complete!")
+            
+            # Show the Data Table
+            st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
+
+            # Show a Bar Chart comparing the two
+            st.write("### Visual Comparison")
+            st.bar_chart(res_df)
