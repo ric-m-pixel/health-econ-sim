@@ -329,7 +329,14 @@ else:
             
             st.markdown("### 🧮 Cost-Effectiveness")
             st.info(f"**The ICER is: ${icer:,.2f} / QALY.** (This is how much you are paying for every 1 unit of health gained by switching to Strategy B).")
-
+            # Create a CSV download button
+            csv = res_df.to_csv().encode('utf-8')
+            st.download_button(
+                label="📥 Download Results as CSV",
+                data=csv,
+                file_name='decision_tree_results.csv',
+                mime='text/csv',
+            )
             # Show a Bar Chart comparing the two
             st.write("### Visual Comparison")
             st.bar_chart(res_df)
