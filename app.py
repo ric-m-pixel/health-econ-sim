@@ -323,9 +323,9 @@ else:
                   # Show the Data Table
             st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
             # Calculate and display the ICER
-                inc_cost = exp_cost_B - exp_cost_A
-                inc_util = exp_util_B - exp_util_A
-                icer = inc_cost / inc_util if inc_util != 0 else 0
+            inc_cost = exp_cost_B - exp_cost_A
+            inc_util = exp_util_B - exp_util_A
+            icer = inc_cost / inc_util if inc_util != 0 else 0
                         
                       
             )
