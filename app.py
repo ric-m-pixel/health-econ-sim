@@ -265,26 +265,26 @@ else:
             for i, state in enumerate(state_names):
                 val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
                 start_pop.append(val)
-    if st.button("📈 Run Markov Simulation"):
-            import pandas as pd
-            import numpy as np
-            
-            history = [np.array(start_pop)]
-            current_pop = np.array(start_pop)
-            
-            for _ in range(n_cycles):
-                current_pop = current_pop @ edited_matrix.values
-                history.append(current_pop)
-                
-            trace_df = pd.DataFrame(history, columns=state_names)
-            trace_df.index.name = "Year"
-            
-            st.success("Simulation Complete!")
-            st.line_chart(trace_df)
-
-    else:
-        st.subheader("🌳 Clinical Decision Tree")
-        st.info("We will build the branch pathways for the Decision Tree here next!")
+            if st.button("📈 Run Markov Simulation"):
+                    import pandas as pd
+                    import numpy as np
+                    
+                    history = [np.array(start_pop)]
+                    current_pop = np.array(start_pop)
+                    
+                    for _ in range(n_cycles):
+                        current_pop = current_pop @ edited_matrix.values
+                        history.append(current_pop)
+                        
+                    trace_df = pd.DataFrame(history, columns=state_names)
+                    trace_df.index.name = "Year"
+                    
+                    st.success("Simulation Complete!")
+                    st.line_chart(trace_df)
+        
+            else:
+                st.subheader("🌳 Clinical Decision Tree")
+                st.info("We will build the branch pathways for the Decision Tree here next!")
            
        
                  
