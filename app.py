@@ -46,7 +46,7 @@ with st.sidebar:
         
     else:
         st.subheader("⏳ Markov Parameters")
-        n_states = st.number_input("Number of Health States", 3, 4, 5)
+        n_states = st.number_input("Number of Health States", min_value=2, max_value=10, value=3)
         state_names = []
         for i in range(int(n_states)):
             name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
