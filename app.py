@@ -47,6 +47,41 @@ with st.sidebar:
     else:
         st.subheader("⏳ Markov Parameters")
         n_states = st.number_input("Number of Health States", min_value=2, max_value=10, value=3)
+        st.divider()
+        st.subheader("⏳ Simulation Settings")
+        
+        # 1. Choose how long to run the model
+        n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
+        
+        # 2. Define starting population (usually 100% in T1)
+        st.write(f"Where do the patients start in Year 0? (Must sum to 100%)")
+        cols = st.columns(n)
+        start_pop = []
+        for i, name in enumerate(state_names):
+            val = cols[i].number_input(f"% in {name}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
+            start_pop.append(val)
+
+        if st.button("📈 Run Markov Simulation"):
+            # The Math Engine
+            history = [np.array(start_pop)]
+            current_pop = np.array(start_pop)
+            
+            for _ in range(n_cycles):
+                current_pop = current_pop @ edited_matrix.values
+                history.append(current_pop)
+            
+            # Create a Results Table
+            trace_df = pd.DataFrame(history, columns=state_names)
+            trace_df.index.name = "Year"
+            
+            st.success("Simulation Complete!")
+            
+            # Show the "Markov Trace" Graph
+            st.line_chart(trace_df)
+            
+            # Show the raw data table
+            with st.expander("View Annual Patient Distribution Data"):
+                st.dataframe(trace_df.style.format("{:.2%}"))
         state_names = []
         for i in range(int(n_states)):
             name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
