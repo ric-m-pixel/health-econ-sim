@@ -281,8 +281,6 @@ else:
                 trace_df = pd.DataFrame(history, columns=state_names)
                 trace_df.index.name = "Year"
             
-            st.success("Simulation Complete!")
-            st.line_chart(trace_df)
             start_pop = []
             for i, state in enumerate(names):
                 val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
@@ -298,11 +296,11 @@ else:
                 import pandas as pd
                 trace_df = pd.DataFrame(history, columns=names)
                 trace_df.index.name = "Year"
-                        st.success("Simulation Complete!")
-                        st.line_chart(trace_df)
+            st.success("Simulation Complete!")
+            st.line_chart(trace_df)
             
-                # --- DECISION TREE SECTION ---
-                    else:
-                        st.subheader("🌳 Clinical Decision Tree")
-                        st.info("We will build the branch pathways for the Decision Tree here next!")
+            # --- DECISION TREE SECTION ---
+            else:
+            st.subheader("🌳 Clinical Decision Tree")
+            st.info("We will build the branch pathways for the Decision Tree here next!")
                  
