@@ -52,10 +52,7 @@ with st.sidebar:
             name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
             state_names.append(name)
         
-    
-st.divider()
-        st.markdown("### 👨‍💻 Developed By")
-        st.markdown("**Richa Mishra**")
+
 col1, col2 = st.columns(2)
 with col1:
     st.markdown("### 🔵 Strategy A")
