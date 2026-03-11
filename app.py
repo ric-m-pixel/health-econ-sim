@@ -287,33 +287,33 @@ else:
                 st.subheader("🌳 Clinical Decision Tree")
                 st.info("We will build the branch pathways for the Decision Tree here next!")
 # --- MARKOV SIMULATION SETTINGS ---
-        st.divider()
-        st.subheader("⏳ Simulation Settings")
-        
-        n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
-        
-        st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
-        cols = st.columns(len(names))
-        start_pop = []
-        for i, state in enumerate(names):
-            val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
-            start_pop.append(val)
-
-        if st.button("📈 Run Markov Simulation"):
-            history = [np.array(start_pop)]
-            current_pop = np.array(start_pop)
-            for _ in range(n_cycles):
-                current_pop = current_pop @ edited_matrix.values
-                history.append(current_pop)
-                
-            import pandas as pd
-            trace_df = pd.DataFrame(history, columns=names)
-            trace_df.index.name = "Year"
-            st.success("Simulation Complete!")
-            st.line_chart(trace_df)
-
-    # --- DECISION TREE SECTION ---
-    else:
-        st.subheader("🌳 Clinical Decision Tree")
-        st.info("We will build the branch pathways for the Decision Tree here next!")
+            st.divider()
+            st.subheader("⏳ Simulation Settings")
+            
+            n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
+            
+            st.write("Where do the patients start in Year 0? (Must sum to 1.0)")
+            cols = st.columns(len(names))
+            start_pop = []
+            for i, state in enumerate(names):
+                val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
+                start_pop.append(val)
+    
+            if st.button("📈 Run Markov Simulation"):
+                history = [np.array(start_pop)]
+                current_pop = np.array(start_pop)
+                for _ in range(n_cycles):
+                    current_pop = current_pop @ edited_matrix.values
+                    history.append(current_pop)
+                    
+                import pandas as pd
+                trace_df = pd.DataFrame(history, columns=names)
+                trace_df.index.name = "Year"
+                st.success("Simulation Complete!")
+                st.line_chart(trace_df)
+    
+        # --- DECISION TREE SECTION ---
+        else:
+            st.subheader("🌳 Clinical Decision Tree")
+            st.info("We will build the branch pathways for the Decision Tree here next!")
          
