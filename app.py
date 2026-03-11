@@ -16,6 +16,12 @@ st.set_page_config(page_title="Healthcare Value and Decision Suite", layout="wid
 st.title("🛡️ Healthcare Value and Decision Suite")
 
 with st.sidebar:
+    # --- Currency Selector (MUST BE AT THE TOP) ---
+    currency_symbol = st.selectbox(
+        "Select Currency",
+        options=["$", "€", "£", "₹", "¥"],
+        index=0
+    )
     st.header("🛠️ Model Configuration")
     
     analysis_level = st.radio(
