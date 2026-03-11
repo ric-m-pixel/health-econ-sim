@@ -47,10 +47,6 @@ with st.sidebar:
             state_names.append(name)
         
     
-else:
-    st.subheader("⏳ Markov Parameters")
-    # (We will build the Matrix and State names right here later)
-    # This must be OUTSIDE any buttons to show all the time
 st.divider()
 st.markdown("### 👨‍💻 Developed By")
 st.markdown("**Richa Mishra**")
