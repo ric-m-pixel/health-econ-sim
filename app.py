@@ -30,11 +30,6 @@ with st.sidebar:
         "Select Model Complexity",
         ["Standard (Static)", "Advanced (Temporal/Markov)"]
     )
-# 2. Universal Inputs (Visible in BOTH modes)
-fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
-wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
-
-st.divider()
 
 # 3. Model-Specific Inputs
 # --- Universal Inputs (Visible in BOTH modes) ---
