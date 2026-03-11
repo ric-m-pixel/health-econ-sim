@@ -22,28 +22,30 @@ with st.sidebar:
     options=["$", "€", "£", "₹", "¥"],
     index=0  # Defaults to USD ($) for international reviewers
     )
-    st.header("🛠️ Model Configuration")
-st.header("🛠️ Model Configuration")
-        analysis_level = st.radio(
+              st.header("🛠️ Model Configuration")
+
+    analysis_level = st.radio(
         "Select Model Complexity",
         ["Standard (Static)", "Advanced (Temporal/Markov)"]
-        )
-        
-        st.divider()
+    )
     
-        # Universal Inputs
-        fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
-        wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
-        st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
-        
-        st.divider()
+    st.divider()
+
+    # Universal Inputs
+    fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+    wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
+    st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
+    
+    st.divider()
 
     if analysis_level == "Standard (Static)":
         st.subheader("📍 Static Parameters")
         model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
-        # INSERT YOUR STRATEGY A/B SLIDERS HERE
+        # --- RE-INSERT STRATEGY A/B SLIDERS HERE ---
+        
     else:
         st.subheader("⏳ Markov Parameters")
+        # --- MARKOV ENGINE WILL GO HERE ---
         # We will add the Matrix here next!    
 # --- Model-Specific Inputs ---
 if analysis_level == "Standard (Static)":
