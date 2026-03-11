@@ -274,31 +274,31 @@ else:
                 current_pop = np.array(start_pop)
                 
                 for _ in range(n_cycles):
-                    current_pop = current_pop @ edited_matrix.values
-                    history.append(current_pop)
-                    
-                # And change 'names' to 'state_names' here for the table columns!
-                trace_df = pd.DataFrame(history, columns=state_names)
-                trace_df.index.name = "Year"
-            
-            start_pop = []
-            for i, state in enumerate(names):
-                val = cols[i].number_input(f"% in {state}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
-                start_pop.append(val)
+               # --- This should be indented under 'with st.sidebar:' ---
+    st.header("🛠️ Model Configuration")
+
+    analysis_level = st.radio(
+        "Select Model Complexity",
+        ["Standard (Static)", "Advanced (Temporal/Markov)"]
+    )
     
-            if st.button("📈 Run Markov Simulation"):
-                history = [np.array(start_pop)]
-                current_pop = np.array(start_pop)
-                for _ in range(n_cycles):
-                    current_pop = current_pop @ edited_matrix.values
-                    history.append(current_pop)
-                    
-                import pandas as pd
-                trace_df = pd.DataFrame(history, columns=names)
-                trace_df.index.name = "Year"
-              st.success("Simulation Complete!")
-              st.line_chart(trace_df)
-            
+    st.divider()
+
+    # Universal Inputs
+    fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+    wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
+    st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
+    
+    st.divider()
+
+    if analysis_level == "Standard (Static)":
+        st.subheader("📍 Static Parameters")
+        model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
+        # INSERT YOUR STRATEGY A/B SLIDERS HERE
+    else:
+        st.subheader("⏳ Markov Parameters")
+        # We will add the Matrix here next!     
+               
             # --- DECISION TREE SECTION ---
             else:
               st.subheader("🌳 Clinical Decision Tree")
