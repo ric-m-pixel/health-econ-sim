@@ -16,18 +16,15 @@ st.set_page_config(page_title="Healthcare Value and Decision Suite", layout="wid
 st.title("🛡️ Healthcare Value and Decision Suite")
 
 with st.sidebar:
-    # --- Currency Selector ---
-    currency_symbol = st.selectbox(
-    "Select Currency",
-    options=["$", "€", "£", "₹", "¥"],
-    index=0  # Defaults to USD ($) for international reviewers
-    )
-   st.header("🛠️ Model Configuration")
+    st.header("🛠️ Model Configuration")
+    
     analysis_level = st.radio(
         "Select Model Complexity",
         ["Standard (Static)", "Advanced (Temporal/Markov)"]
-    ) 
+    )
+    
     st.divider()
+
     # Universal Inputs
     fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
     wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
@@ -38,19 +35,15 @@ with st.sidebar:
     if analysis_level == "Standard (Static)":
         st.subheader("📍 Static Parameters")
         model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
-        # --- RE-INSERT STRATEGY A/B SLIDERS HERE ---
+        # You will re-add Strategy A/B success sliders here later
         
     else:
         st.subheader("⏳ Markov Parameters")
-        # --- MARKOV ENGINE WILL GO HERE ---
-        # We will add the Matrix here next!    
-# --- Model-Specific Inputs ---
-if analysis_level == "Standard (Static)":
-    st.subheader("📍 Static Parameters")
-    model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
-    
-    # (Your Strategy A and Strategy B success sliders will go right here, underneath this line)
-
+        n_states = st.number_input("Number of Health States", 2, 5, 3)
+        state_names = []
+        for i in range(int(n_states)):
+            name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
+            state_names.append(name)
 else:
     st.subheader("⏳ Markov Parameters")
     # (We will build the Matrix and State names right here later)
