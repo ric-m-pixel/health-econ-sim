@@ -24,7 +24,19 @@ with st.sidebar:
     )
 
     st.header("🛠️ Model Configuration")
+     # --- Model Engine Selection ---
+    analysis_level = st.radio(
+    "Select Model Complexity",
+    ["Standard (Static)", "Advanced (Temporal/Markov)"]
+    )
+if analysis_level == "Standard (Static)":
+    # This is where your current model_mode and sliders go
     model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
+    # ... (Keep your current fail_c, wtp, and Strategy sliders here)
+else:
+    # This is where we will build the Markov/Temporal inputs
+    st.subheader("⏳ Temporal Markov Setup")
+    # ... (We will put the Matrix and Time sliders here) model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
     fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
     wtp = st.sidebar.number_input("Willingness-to-Pay threshold (₹)", min_value=0, value=1000, step=100)
     st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
