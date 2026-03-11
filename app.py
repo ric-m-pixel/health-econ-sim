@@ -298,8 +298,7 @@ else:
             u_fail_B = st.slider("Utility (QALY) of Failure", 0.0, 1.0, 0.50, key="ufB")
 
         st.divider()
-
-        # The Math Engine for the Decision Tree
+# The Math Engine for the Decision Tree
         if st.button("📊 Calculate Decision Tree"):
             import pandas as pd
             
@@ -311,7 +310,6 @@ else:
             exp_util_A = (prob_A * u_succ_A) + ((1 - prob_A) * u_fail_A)
             exp_util_B = (prob_B * u_succ_B) + ((1 - prob_B) * u_fail_B)
 
-            # Put the results in a table
             res_df = pd.DataFrame({
                 "Strategy": ["A: Standard Care", "B: New Treatment"],
                 "Expected Cost": [exp_cost_A, exp_cost_B],
@@ -319,14 +317,26 @@ else:
             }).set_index("Strategy")
 
             st.success("Decision Tree Calculation Complete!")
-            
-                  # Show the Data Table
             st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
-            # Calculate and display the ICER
+
+            # Cost-Effectiveness Calculation
             inc_cost = exp_cost_B - exp_cost_A
             inc_util = exp_util_B - exp_util_A
             icer = inc_cost / inc_util if inc_util != 0 else 0
-                        
-            # Show a Bar Chart comparing the two
+            
+            st.markdown("### 🧮 Cost-Effectiveness")
+            st.info(f"**The ICER is: ${icer:,.2f} / QALY.**")
+
+            # THE DOWNLOAD BUTTON
+            csv = res_df.to_csv().encode('utf-8')
+            st.download_button(
+                label="📥 Download Results as CSV",
+                data=csv,
+                file_name='decision_tree_results.csv',
+                mime='text/csv',
+            )
+
             st.write("### Visual Comparison")
             st.bar_chart(res_df)
+       
+         
