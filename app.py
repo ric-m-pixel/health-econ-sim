@@ -320,23 +320,15 @@ else:
 
             st.success("Decision Tree Calculation Complete!")
             
-                        # Show the Data Table
-                        st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
-                        # Calculate and display the ICER
-                        inc_cost = exp_cost_B - exp_cost_A
-                        inc_util = exp_util_B - exp_util_A
-                        icer = inc_cost / inc_util if inc_util != 0 else 0
+                  # Show the Data Table
+                  st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
+                  # Calculate and display the ICER
+                  inc_cost = exp_cost_B - exp_cost_A
+                  inc_util = exp_util_B - exp_util_A
+                  icer = inc_cost / inc_util if inc_util != 0 else 0
                         
-                        st.markdown("### 🧮 Cost-Effectiveness")
-                        st.info(f"**The ICER is: ${icer:,.2f} / QALY.** (This is how much you are paying for every 1 unit of health gained by switching to Strategy B).")
-                        # Create a CSV download button
-                        csv = res_df.to_csv().encode('utf-8')
-                        st.download_button(
-                            label="📥 Download Results as CSV",
-                            data=csv,
-                            file_name='decision_tree_results.csv',
-                            mime='text/csv',
-                        )
-                        # Show a Bar Chart comparing the two
-                        st.write("### Visual Comparison")
-                        st.bar_chart(res_df)
+                      
+                  )
+                  # Show a Bar Chart comparing the two
+                  st.write("### Visual Comparison")
+                  st.bar_chart(res_df)
