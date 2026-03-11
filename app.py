@@ -18,17 +18,33 @@ st.title("🛡️ Healthcare Value and Decision Suite")
 with st.sidebar:
     # --- Currency Selector ---
     currency_symbol = st.selectbox(
-        "Select Currency",
-        options=["$", "€", "£", "₹", "¥"],
-        index=0  # Defaults to USD ($) for international reviewers
+    "Select Currency",
+    options=["$", "€", "£", "₹", "¥"],
+    index=0  # Defaults to USD ($) for international reviewers
     )
-
     st.header("🛠️ Model Configuration")
-     # --- Model Engine Selection ---
+    st.header("🛠️ Model Configuration")
+    
+    # 1. The Global Switcher
     analysis_level = st.radio(
-    "Select Model Complexity",
-    ["Standard (Static)", "Advanced (Temporal/Markov)"]
+        "Select Model Complexity",
+        ["Standard (Static)", "Advanced (Temporal/Markov)"]
     )
+# 2. Universal Inputs (Visible in BOTH modes)
+fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_value=0, value=1000, step=100)
+
+st.divider()
+
+# 3. Model-Specific Inputs
+if analysis_level == "Standard (Static)":
+    st.subheader("📍 Static Parameters")
+    model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
+    # Put your Strategy A/B success sliders here
+    
+else:
+    st.subheader("⏳ Markov Parameters")
+    # This is where we will add the Matrix and State names (T1, T2, etc.)
 if analysis_level == "Standard (Static)":
     # This is where your current model_mode and sliders go
     model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
