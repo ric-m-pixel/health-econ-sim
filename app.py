@@ -48,29 +48,13 @@ with st.sidebar:
         st.subheader("⏳ Markov Parameters")
         n_states = st.number_input("Number of Health States", min_value=2, max_value=10, value=3)
         st.divider()
-        st.subheader("⏳ Simulation Settings")
-        
-        # 1. Choose how long to run the model
-        n_cycles = st.slider("Number of Years (Cycles) to simulate:", 1, 50, 10)
-        
-        # 2. Define starting population (usually 100% in T1)
-        st.write(f"Where do the patients start in Year 0? (Must sum to 100%)")
         col1, col2 = st.columns(2)
         start_pop = []
         for i, name in enumerate(state_names):
             val = cols[i].number_input(f"% in {name}", 0.0, 1.0, 1.0 if i==0 else 0.0, step=0.1, key=f"start_{i}")
             start_pop.append(val)
-
         if st.button("📈 Run Markov Simulation"):
             # The Math Engine
-            history = [np.array(start_pop)]
-            current_pop = np.array(start_pop)
-            
-            for _ in range(n_cycles):
-                current_pop = current_pop @ edited_matrix.values
-                history.append(current_pop)
-            
-            # Create a Results Table
             trace_df = pd.DataFrame(history, columns=state_names)
             trace_df.index.name = "Year"
             
