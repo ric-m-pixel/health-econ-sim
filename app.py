@@ -37,30 +37,27 @@ wtp = st.number_input(f"Willingness-to-Pay threshold ({currency_symbol})", min_v
 st.divider()
 
 # 3. Model-Specific Inputs
+# --- Universal Inputs (Visible in BOTH modes) ---
+fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
+wtp = st.number_input("Willingness-to-Pay threshold (₹)", min_value=0, value=1000, step=100)
+st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
+
+st.divider()
+
+# --- Model-Specific Inputs ---
 if analysis_level == "Standard (Static)":
     st.subheader("📍 Static Parameters")
-    model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
-    # Put your Strategy A/B success sliders here
+    model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"], key="static_mode")
     
+    # (Your Strategy A and Strategy B success sliders will go right here, underneath this line)
+
 else:
     st.subheader("⏳ Markov Parameters")
-    # This is where we will add the Matrix and State names (T1, T2, etc.)
-if analysis_level == "Standard (Static)":
-    # This is where your current model_mode and sliders go
-    model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
-    # ... (Keep your current fail_c, wtp, and Strategy sliders here)
-else:
-    # This is where we will build the Markov/Temporal inputs
-    st.subheader("⏳ Temporal Markov Setup")
-    # ... (We will put the Matrix and Time sliders here) model_mode = st.radio("Analysis Type:", ["Clinical Success", "QALY (Cost-Effectiveness)"])
-    fail_c = st.number_input(f"Downstream Failure Cost ({currency_symbol})", 0, 50000, 5000)
-    wtp = st.sidebar.number_input("Willingness-to-Pay threshold (₹)", min_value=0, value=1000, step=100)
-    st.info("The WTP threshold represents the maximum price a system is willing to pay for 1 unit of benefit.")
-    
+    # (We will build the Matrix and State names right here later)
     # This must be OUTSIDE any buttons to show all the time
-    st.divider()
-    st.markdown("### 👨‍💻 Developed By")
-    st.markdown("**Richa Mishra**")
+st.divider()
+st.markdown("### 👨‍💻 Developed By")
+st.markdown("**Richa Mishra**")
 
 col1, col2 = st.columns(2)
 with col1:
