@@ -273,11 +273,10 @@ else:
             st.success("Simulation Complete!")
             st.line_chart(trace_df)
 
-    else:
     elif adv_tool == "Decision Tree (Short-term)":
-    # --- DECISION TREE SECTION ---
-     st.subheader("🌳 Clinical Decision Tree")
-     st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
+        # --- DECISION TREE SECTION ---
+        st.subheader("🌳 Clinical Decision Tree")
+        st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
         
     # Create two columns for our two strategies
     col1, col2 = st.columns(2)
