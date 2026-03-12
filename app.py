@@ -275,7 +275,7 @@ else:
 
     else:
     elif adv_tool == "Decision Tree (Short-term)":
-     # --- DECISION TREE SECTION ---
+    # --- DECISION TREE SECTION ---
      st.subheader("🌳 Clinical Decision Tree")
      st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
         
