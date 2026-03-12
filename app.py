@@ -285,16 +285,16 @@ else:
         with col1:
             st.markdown("#### 🔵 Strategy A: Standard Care")
             prob_A = st.slider("Probability of Success (A)", 0.0, 1.0, 0.60, key="pA")
-            c_succ_A = st.number_input("Cost of Success", value=1000, step=100, key="csA")
-            c_fail_A = st.number_input("Cost of Failure", value=5000, step=100, key="cfA")
+            c_succ_A = st.number_input(f"Cost of Success", value=1000, step=100, key="csA")
+            c_fail_A = st.number_input(f"Cost of Failure", value=5000, step=100, key="cfA")
             u_succ_A = st.slider("Utility (QALY) of Success", 0.0, 1.0, 0.90, key="usA")
             u_fail_A = st.slider("Utility (QALY) of Failure", 0.0, 1.0, 0.40, key="ufA")
     
         with col2:
             st.markdown("#### 🟠 Strategy B: New Treatment")
             prob_B = st.slider("Probability of Success (B)", 0.0, 1.0, 0.80, key="pB")
-            c_succ_B = st.number_input("Cost of Success", value=2500, step=100, key="csB")
-            c_fail_B = st.number_input("Cost of Failure", value=4000, step=100, key="cfB")
+            c_succ_B = st.number_input(f"Cost of Success", value=2500, step=100, key="csB")
+            c_fail_B = st.number_input(f"Cost of Failure", value=4000, step=100, key="cfB")
             u_succ_B = st.slider("Utility (QALY) of Success", 0.0, 1.0, 0.95, key="usB")
             u_fail_B = st.slider("Utility (QALY) of Failure", 0.0, 1.0, 0.50, key="ufB")
     
@@ -317,14 +317,18 @@ else:
             }).set_index("Strategy")
     
             st.success("Calculation Complete!")
-            st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
+            formatted_df = res_df.style.format({
+            "Expected Cost": lambda x: f"{currency_symbol}{x:,.2f}", 
+            "Expected Utility (QALY)": "{:.3f}"
+            })
+            st.dataframe(formatted_df)
     
             # ICER & Download
             inc_cost = exp_cost_B - exp_cost_A
             inc_util = exp_util_B - exp_util_A
             icer = inc_cost / inc_util if inc_util != 0 else 0
             
-            st.info(f"**The ICER is: ${icer:,.2f} / QALY.**")
+            st.info(f"**The ICER is: {currency_symbol}{icer:,.2f} / QALY.**")
     
             csv = res_df.to_csv().encode('utf-8')
             st.download_button("📥 Download Results as CSV", data=csv, file_name='results.csv', mime='text/csv')
