@@ -279,8 +279,8 @@ else:
         st.subheader("Clinical Decision Tree")
         st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
         
-    # Create two columns for our two strategies
-    col1, col2 = st.columns(2)
+        # Create two columns for our two strategies
+        col1, col2 = st.columns(2)
 
     with col1:
         st.markdown("#### 🔵 Strategy A: Standard Care")
