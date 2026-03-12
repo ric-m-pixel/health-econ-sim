@@ -233,9 +233,7 @@ else:
         st.subheader("🔄 Markov Transition Matrix")
         import pandas as pd
         import numpy as np
-        
-        # Get names from sidebar (fallback to T1/T2/T3 if not found)
-        state_names = st.session_state.get('state_names', ["T1", "T2", "T3"])
+         
         n = len(state_names)
         
         init_matrix = np.identity(n)
