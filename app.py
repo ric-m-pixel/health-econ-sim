@@ -14,6 +14,7 @@ def run_simulation(cost, effect, fail_cost, iterations=10000):
 # --- APP SETUP ---
 st.set_page_config(page_title="Healthcare Value and Decision Suite", layout="wide")
 st.title("🛡️ Healthcare Value and Decision Suite")
+st.write("An interactive health economics evaluation model.")
 
 with st.sidebar:
     # --- Currency Selector (MUST BE AT THE TOP) ---
