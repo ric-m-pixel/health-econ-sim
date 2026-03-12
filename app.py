@@ -218,7 +218,7 @@ if analysis_level == "Standard (Static)":
                 m1.metric("Mean ICER", f"₹{avg_icer:,.0f}")
                 m2.metric("Confidence in Cost-Effectiveness", f"{p_ce:.1f}%")
 else:
-    st.title("🚀 Advanced Modeling Suite")
+    st.title(" Advanced Modeling Suite")
     
     adv_tool = st.radio(
         "Select your advanced method:",
