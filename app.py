@@ -315,7 +315,7 @@ else:
             "Expected Utility (QALY)": [exp_util_A, exp_util_B]
         }).set_index("Strategy")
 
-        st.success("Decision Tree Calculation Complete!")
+        st.success("Calculation Complete!")
         st.dataframe(res_df.style.format({"Expected Cost": "${:,.2f}", "Expected Utility (QALY)": "{:.3f}"}))
 
         # ICER & Download
