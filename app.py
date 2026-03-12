@@ -275,7 +275,7 @@ else:
 
     elif adv_tool == "Decision Tree (Short-term)":
         # --- DECISION TREE SECTION ---
-        st.subheader("🌳 Clinical Decision Tree")
+        st.subheader("Clinical Decision Tree")
         st.write("Compare the expected costs and clinical outcomes of two competing strategies.")
         
     # Create two columns for our two strategies
@@ -300,7 +300,7 @@ else:
     st.divider()
 
     # The Math Engine
-    if st.button("📊 Calculate Decision Tree"):
+    if st.button("📊 Run Cost-Effectiveness Analysis"):
         import pandas as pd
         
         # Calculations
