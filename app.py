@@ -52,7 +52,9 @@ with st.sidebar:
         for i in range(int(n_states)):
             name = st.text_input(f"State {i+1} Name:", value=f"T{i+1}", key=f"s_{i}")
             state_names.append(name)
-        
+            
+    st.sidebar.divider()
+        st.sidebar.caption("Developed by **Richa Mishra**")
 
 if analysis_level == "Standard (Static)":
     col1, col2 = st.columns(2)
