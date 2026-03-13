@@ -54,7 +54,7 @@ with st.sidebar:
             state_names.append(name)
             
 st.sidebar.divider()
-st.sidebar.caption("Developed by **Richa Mishra**")
+st.sidebar.caption("Developed by **Dr Richa Mishra**")
 
 if analysis_level == "Standard (Static)":
     col1, col2 = st.columns(2)
