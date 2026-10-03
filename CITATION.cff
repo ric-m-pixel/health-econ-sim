@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software in research, teaching, health technology assessment, or economic evaluation, please cite the software using the citation generated from this file."
+title: "HealthEconSim: Healthcare Value and Decision Suite"
+type: software
+version: 1.0.0
+date-released: 2026-10-03
+authors:
+  - family-names: "Mishra"
+    given-names: "Richa"
+abstract: "HealthEconSim is an interactive browser-based health economics decision-support suite for cost-effectiveness evaluation. It supports static and temporal/Markov modelling, Monte Carlo probabilistic sensitivity analysis, cost-effectiveness visualization, tornado analysis, and clinical-success or QALY-based evaluation frameworks."
+keywords:
+  - health technology assessment
+  - health economics
+  - cost-effectiveness analysis
+  - decision analysis
+  - Markov model
+  - probabilistic sensitivity analysis
+  - Monte Carlo simulation
+  - QALY
+  - Streamlit
+url: "https://health-econ-sim.streamlit.app/"
+repository-code: "https://github.com/ric-m-pixel/health-econ-sim"
