@@ -4,6 +4,7 @@ title: "HealthEconSim: Healthcare Value and Decision Suite"
 type: software
 version: 1.0.0
 date-released: 2026-10-03
+doi: "10.5281/zenodo.23121407"
 authors:
   - family-names: "Mishra"
     given-names: "Richa"
